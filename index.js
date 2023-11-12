@@ -17,22 +17,16 @@ await fastify.register(cors, {
 mongoose.connect('mongodb://127.0.0.1:27017/todos');
 
 // Declare a route
-fastify.get('/', async (req, res) => {
+fastify.get('/todos', async (req, res) => {
   const toDos = await toDoModel.find();
   res.send(toDos);
 });
 
-fastify.get('/:shortUrl', async (req, res) => {
-  const shortUrl = await toDoModel.findOne({ shortURL: req.params.shortUrl });
-
-  if (shortUrl === null) return res.code(404).send();
-  res.redirect(shortUrl.originalURL);
-});
-
 fastify.post('/todos/post', async (req, res) => {
-  const { toDo } = req.body;
+  const { title, text, done } = req.body;
+  console.log(title);
 
-  if (!toDo) {
+  if (!title) {
     return res.code(400).send({ error: 'Todo is required' });
   }
 
@@ -50,7 +44,7 @@ fastify.post('/todos/post', async (req, res) => {
 
 // Run the server!
 try {
-  await fastify.listen({ port: 3000 });
+  await fastify.listen({ port: 3500 });
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
