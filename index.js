@@ -29,23 +29,23 @@ fastify.get('/:shortUrl', async (req, res) => {
   res.redirect(shortUrl.originalURL);
 });
 
-fastify.post('/shorten', async (req, res) => {
+fastify.post('/todos/post', async (req, res) => {
   const { toDo } = req.body;
 
   if (!toDo) {
     return res.code(400).send({ error: 'Todo is required' });
   }
 
-  const newURL = new URLModel({
+  const newToDo = new toDoModel({
     title,
     longDescription: text,
     done,
   });
 
   // Save the short url and send back all of the urls to update the list
-  await newURL.save();
-  const URLs = await URLModel.find();
-  res.code(201).send(URLs);
+  await newToDo.save();
+  const toDos = await toDoModel.find();
+  res.code(201).send(toDos);
 });
 
 // Run the server!
