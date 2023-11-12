@@ -3,7 +3,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import mongoose from 'mongoose';
 import { nanoid } from 'nanoid';
-import toDoModel from './src/models/url.js';
+import toDoModel from './src/models/todo.js';
 
 const fastify = Fastify({
   logger: true,
@@ -14,10 +14,7 @@ await fastify.register(cors, {
 });
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/todos', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://127.0.0.1:27017/todos');
 
 // Declare a route
 fastify.get('/', async (req, res) => {
@@ -26,7 +23,7 @@ fastify.get('/', async (req, res) => {
 });
 
 fastify.get('/:shortUrl', async (req, res) => {
-  const shortUrl = await URLModel.findOne({ shortURL: req.params.shortUrl });
+  const shortUrl = await toDoModel.findOne({ shortURL: req.params.shortUrl });
 
   if (shortUrl === null) return res.code(404).send();
   res.redirect(shortUrl.originalURL);

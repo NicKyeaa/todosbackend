@@ -13,8 +13,12 @@ const todoSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  done: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const toDoModel = mongoose.model('URL', todoSchema);
 
-export default URLModel;
+export default toDoModel;
