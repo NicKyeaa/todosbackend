@@ -29,6 +29,25 @@ fastify.get('/:shortUrl', async (req, res) => {
   res.redirect(shortUrl.originalURL);
 });
 
+fastify.post('/shorten', async (req, res) => {
+  const { toDo } = req.body;
+
+  if (!toDo) {
+    return res.code(400).send({ error: 'Todo is required' });
+  }
+
+  const newURL = new URLModel({
+    title,
+    longDescription: text,
+    done,
+  });
+
+  // Save the short url and send back all of the urls to update the list
+  await newURL.save();
+  const URLs = await URLModel.find();
+  res.code(201).send(URLs);
+});
+
 // Run the server!
 try {
   await fastify.listen({ port: 3000 });
