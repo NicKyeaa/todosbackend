@@ -1,0 +1,11 @@
+{
+  "name": "todosbackend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^8.4.1",
+    "fastify": "^4.24.3",
+    "mongoose": "^8.0.0"
+  }
+}
