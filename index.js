@@ -23,7 +23,7 @@ fastify.get('/todos', async (req, res) => {
 });
 
 fastify.post('/todos/post', async (req, res) => {
-  const { title, text, done } = req.body;
+  const { title, longDescription, done } = req.body;
   console.log(title);
 
   if (!title) {
@@ -32,7 +32,7 @@ fastify.post('/todos/post', async (req, res) => {
 
   const newToDo = new toDoModel({
     title,
-    longDescription: text,
+    longDescription,
     done,
   });
 
