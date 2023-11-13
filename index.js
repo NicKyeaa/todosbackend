@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import toDoModel from './src/models/todo.js';
 
 const fastify = Fastify({
-  logger: true,
+  logger: false,
 });
 await fastify.register(cors, {
   domain: 'http://localhost:3000',
