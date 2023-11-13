@@ -19,6 +19,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/todos');
 // Declare a route
 fastify.get('/todos', async (req, res) => {
   const toDos = await toDoModel.find();
+  console.log(toDos);
   res.send(toDos);
 });
 
