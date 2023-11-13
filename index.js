@@ -9,7 +9,7 @@ const fastify = Fastify({
   logger: true,
 });
 await fastify.register(cors, {
-  domain: 'http://localhost:3500',
+  domain: 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 });
 
