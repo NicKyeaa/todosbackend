@@ -19,13 +19,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/todos');
 // Declare a route
 fastify.get('/todos', async (req, res) => {
   const toDos = await toDoModel.find();
-  console.log(toDos);
   res.send(toDos);
 });
 
 fastify.post('/todos/post', async (req, res) => {
   const { title, longDescription, done } = req.body;
-  console.log(title);
 
   if (!title) {
     return res.code(400).send({ error: 'Todo is required' });
@@ -41,6 +39,12 @@ fastify.post('/todos/post', async (req, res) => {
   await newToDo.save();
   const toDos = await toDoModel.find();
   res.code(201).send(toDos);
+});
+
+fastify.delete('todos/:id', async (req, res) => {
+  const { toDoID } = req.params;
+  console.log(req);
+  console.log(toDoID);
 });
 
 // Run the server!
