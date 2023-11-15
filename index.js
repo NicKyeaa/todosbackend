@@ -41,7 +41,7 @@ fastify.post('/todos/post', async (req, res) => {
   res.code(201).send(toDos);
 });
 
-fastify.delete('todos/:id', async (req, res) => {
+fastify.delete('/todos/:id', async (req, res) => {
   const { toDoID } = req.params;
   console.log(req);
   console.log(toDoID);
