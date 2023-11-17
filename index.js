@@ -54,7 +54,9 @@ fastify.delete('/todos/:toDoID', async (req, res) => {
 
 // Run the server!
 try {
-  await fastify.listen({ port: 3500 }, 'Listening on a port 3500');
+  await fastify.listen({ port: 3500 }, () => {
+    console.log('Listening on port 3500');
+  });
 } catch (err) {
   fastify.log.error(err);
   process.exit(1);
