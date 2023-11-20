@@ -54,8 +54,27 @@ fastify.delete('/todos/:toDoID', async (req, res) => {
 
 fastify.put('/todos/:toDoID', async (req, res) => {
   const { toDoID } = req.params;
-  console.log(toDoID);
-  res.send('Todo edited');
+  const { title, longDescription, done } = req.body;
+
+  try {
+    // Use findByIdAndUpdate to update the todo
+    const updatedToDo = await toDoModel.findByIdAndUpdate(
+      toDoID,
+      { title, longDescription, done },
+      { new: true } // This option returns the modified document
+    );
+
+    // Check if the todo exists
+    if (!updatedToDo) {
+      return res.code(404).send({ error: 'ToDo not found' });
+    }
+
+    // Send back the updated todo
+    res.code(200).send(updatedToDo);
+  } catch (error) {
+    console.error('Error updating ToDo:', error);
+    res.code(500).send({ error: 'Internal Server Error' });
+  }
 });
 
 // Run the server!
