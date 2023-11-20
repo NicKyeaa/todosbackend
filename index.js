@@ -52,6 +52,12 @@ fastify.delete('/todos/:toDoID', async (req, res) => {
   res.code(200).send('ToDo is deleted');
 });
 
+fastify.put('/todos/:toDoID', async (req, res) => {
+  const { toDoID } = req.params;
+  console.log(toDoID);
+  res.send('Todo edited');
+});
+
 // Run the server!
 try {
   await fastify.listen({ port: 3500 }, () => {
